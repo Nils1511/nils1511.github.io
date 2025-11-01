@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Nirmal Solanki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #f59e0b, #14b8a6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .skill-item {
+            transition: all 0.3s ease;
+        }
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+        .experience-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+        }
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold gradient-text">Nirmal Solanki</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="projects.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="about.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium border-b-2 border-amber-500">About</a>
+                        <a href="contact.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6">About Me</h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Machine Learning Engineer with over a year of experience in creating impactful ML solutions. 
+                        Skilled in Python and TensorFlow, with expertise in building and integrating RESTful APIs using FastAPI.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-8">
+                        Experienced in natural language processing and deep learning, having developed architectural structures 
+                        and optimized models for enhanced performance. Eager to contribute to dynamic teams driving technological innovation.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="contact.html" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Let's Connect
+                        </a>
+                        <a href="projects.html" class="border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                            View My Work
+                        </a>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="resources/profile-photo.png" alt="Nirmal Solanki" class="w-full max-w-md mx-auto rounded-2xl shadow-2xl">
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-amber-400 to-teal-400 rounded-full opacity-20"></div>
+                        <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full opacity-20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal">
+                    <div class="stats-counter" data-target="15">0</div>
+                    <div class="text-gray-600 font-medium">ML Models Built</div>
+                </div>
+                <div class="reveal">
+                    <div class="stats-counter" data-target="98" data-suffix="%"></div>
+                    <div class="text-gray-600 font-medium">Average Accuracy</div>
+                </div>
+                <div class="reveal">
+                    <div class="stats-counter" data-target="5" data-prefix=">"></div>
+                    <div class="text-gray-600 font-medium">Production Systems</div>
+                </div>
+                <div class="reveal">
+                    <div class="stats-counter" data-target="3" data-suffix="+"></div>
+                    <div class="text-gray-600 font-medium">Research Papers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Radar Chart -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Technical Skills</h2>
+                <p class="text-xl text-gray-600">Interactive visualization of my technical expertise</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div id="skills-radar" style="height: 500px;"></div>
+                </div>
+                <div class="space-y-6">
+                    <div class="reveal">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Core Competencies</h3>
+                        <div class="space-y-4">
+                            <div class="skill-item p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-gray-900">Machine Learning</span>
+                                    <span class="text-sm text-gray-600">Expert</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-blue-500 to-teal-500 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-gray-900">Python Development</span>
+                                    <span class="text-sm text-gray-600">Expert</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-gray-900">Computer Vision</span>
+                                    <span class="text-sm text-gray-600">Advanced</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-gray-900">Natural Language Processing</span>
+                                    <span class="text-sm text-gray-600">Advanced</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-amber-500 to-orange-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-item p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-gray-900">MLOps & Deployment</span>
+                                    <span class="text-sm text-gray-600">Advanced</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-teal-500 to-green-500 h-2 rounded-full" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Experience -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Education & Experience</h2>
+                <p class="text-xl text-gray-600">My academic journey and professional growth</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Education -->
+                <div class="reveal">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Education</h3>
+                    <div class="space-y-8">
+                        <div class="experience-card p-6 rounded-xl border border-gray-200">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xl">🎓</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">B.Tech in Engineering Physics</h4>
+                                    <p class="text-gray-600 mb-2">Indian Institute of Technology, Bombay</p>
+                                    <p class="text-sm text-gray-500 mb-3">Graduated: May 2024</p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700">• Image Captioning with Cross-Attention for enhanced visual-language alignment</p>
+                                        <p class="text-sm text-gray-700">• Facial Detection Bias Mitigation using Semi-Supervised VAE (SSVAE)</p>
+                                        <p class="text-sm text-gray-700">• Image Segmentation with U-Net for high-precision visual mapping</p>
+                                        <p class="text-sm text-gray-700">• LLM Training & Fine-tuning using Multi-Head Attention (MHA)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience -->
+                <div class="reveal">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Professional Experience</h3>
+                    <div class="space-y-8">
+                        <div class="experience-card p-6 rounded-xl border border-gray-200">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xl">💼</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">Machine Learning Engineer</h4>
+                                    <p class="text-gray-600 mb-2">Passionbits, Bengaluru</p>
+                                    <p class="text-sm text-gray-500 mb-3">May 2025 - Present</p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700">• Spearheading development of recommended architectural structure for videos</p>
+                                        <p class="text-sm text-gray-700">• Automated market trend analysis using social media data</p>
+                                        <p class="text-sm text-gray-700">• Backend pipeline management: Database, Celery, caching, APIs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-card p-6 rounded-xl border border-gray-200">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xl">🔬</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">Research Intern</h4>
+                                    <p class="text-gray-600 mb-2">Boltzmann Labs, Hyderabad</p>
+                                    <p class="text-sm text-gray-500 mb-3">Jan 2025 - Apr 2025</p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700">• Developed ML-driven force fields for molecular dynamics</p>
+                                        <p class="text-sm text-gray-700">• Analyzed SPICE, QM9, ANI1, and MD datasets</p>
+                                        <p class="text-sm text-gray-700">• Benchmarked classical AMBER and CHARMM force fields</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-card p-6 rounded-xl border border-gray-200">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xl">🚀</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">Machine Learning Engineer</h4>
+                                    <p class="text-gray-600 mb-2">TrueFan, Gurugram</p>
+                                    <p class="text-sm text-gray-500 mb-3">Aug 2024 - Sep 2024</p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700">• Optimized lip-sync modules using InsightFace</p>
+                                        <p class="text-sm text-gray-700">• Implemented ML solutions with Docker containers</p>
+                                        <p class="text-sm text-gray-700">• Developed RESTful APIs for model integration</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Philosophy -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">My Approach</h2>
+                <p class="text-xl text-gray-600">Philosophy and methodology in machine learning engineering</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center reveal">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Problem-First Approach</h3>
+                    <p class="text-gray-600">
+                        I believe in deeply understanding the problem domain before jumping to solutions. 
+                        Every ML project starts with thorough analysis of business requirements and data characteristics.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center reveal">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Iterative Development</h3>
+                    <p class="text-gray-600">
+                        Machine learning is an iterative process. I embrace rapid prototyping, continuous testing, 
+                        and incremental improvements to build robust and reliable systems.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center reveal">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">🤝</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Collaborative Innovation</h3>
+                    <p class="text-gray-600">
+                        The best solutions emerge from collaboration. I actively engage with cross-functional teams, 
+                        domain experts, and the ML community to drive innovation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">© 2024 Nirmal Solanki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initSkillsRadar();
+            initStatsCounters();
+            initScrollReveal();
+            initSkillBars();
+        });
+
+        // Skills radar chart
+        function initSkillsRadar() {
+            const chartDom = document.getElementById('skills-radar');
+            const myChart = echarts.init(chartDom);
+            
+            const option = {
+                title: {
+                    text: 'Technical Skills Assessment',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 18,
+                        fontWeight: 'bold'
+                    }
+                },
+                radar: {
+                    indicator: [
+                        { name: 'Machine Learning', max: 100 },
+                        { name: 'Python Development', max: 100 },
+                        { name: 'Computer Vision', max: 100 },
+                        { name: 'Natural Language Processing', max: 100 },
+                        { name: 'MLOps & Deployment', max: 100 },
+                        { name: 'Research & Innovation', max: 100 }
+                    ],
+                    shape: 'polygon',
+                    splitNumber: 5,
+                    axisName: {
+                        color: '#666',
+                        fontSize: 12
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#ddd'
+                        }
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(59, 130, 246, 0.1)', 'rgba(16, 185, 129, 0.1)']
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Skills',
+                    type: 'radar',
+                    data: [{
+                        value: [95, 92, 88, 85, 82, 90],
+                        name: 'Current Level',
+                        areaStyle: {
+                            color: 'rgba(59, 130, 246, 0.3)'
+                        },
+                        lineStyle: {
+                            color: '#3b82f6',
+                            width: 3
+                        },
+                        itemStyle: {
+                            color: '#3b82f6'
+                        }
+                    }]
+                }]
+            };
+            
+            myChart.setOption(option);
+            
+            window.addEventListener('resize', () => {
+                myChart.resize();
+            });
+        }
+
+        // Animated stats counters
+        function initStatsCounters() {
+            const counters = document.querySelectorAll('.stats-counter');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.dataset.target);
+                        const prefix = counter.dataset.prefix || '';
+                        const suffix = counter.dataset.suffix || '';
+                        
+                        animateCounter(counter, target, prefix, suffix);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function animateCounter(element, target, prefix, suffix) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = prefix + Math.floor(current) + suffix;
+            }, 20);
+        }
+
+        // Skill bars animation
+        function initSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-item .bg-gradient-to-r');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        
+                        setTimeout(() => {
+                            bar.style.transition = 'width 1.5s ease-out';
+                            bar.style.width = width;
+                        }, 200);
+                        
+                        observer.unobserve(bar);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => observer.observe(bar));
+        }
+
+        // Scroll reveal animation
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+        }
+    </script>
+</body>
+</html>

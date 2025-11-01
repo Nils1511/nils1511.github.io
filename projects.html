@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Nirmal Solanki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .project-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+        }
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #f59e0b, #14b8a6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .timeline-item {
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        .timeline-item.active {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.6s ease;
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #f59e0b, #14b8a6);
+            color: white;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold gradient-text">Nirmal Solanki</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="projects.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium border-b-2 border-amber-500">Projects</a>
+                        <a href="about.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="contact.html" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">My Projects</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Exploring the intersection of machine learning, computer vision, and real-world applications
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Filters -->
+    <section class="py-8 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="computer-vision">
+                    Computer Vision
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="nlp">
+                    Natural Language Processing
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="research">
+                    Research
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 font-medium" data-filter="production">
+                    Production ML
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Timeline -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Project Timeline</h2>
+                <p class="text-xl text-gray-600">My journey through machine learning and research</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-400 to-teal-400"></div>
+                
+                <!-- Timeline items -->
+                <div class="space-y-16">
+                    <!-- Current Project -->
+                    <div class="timeline-item flex items-center" data-category="production">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center justify-end mb-4">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Current</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3">Video Recommendation Architecture</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Leading the development of a recommended architectural structure for videos to enhance analysis efficiency. 
+                                    Automated market trend analysis using data from Reddit, Facebook, and Instagram.
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">FastAPI</span>
+                                    <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Docker</span>
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Celery</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-amber-500 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-1/2 pl-8">
+                            <div class="text-sm text-gray-500">2025 - Present</div>
+                            <div class="font-semibold text-gray-700">Passionbits, Bengaluru</div>
+                        </div>
+                    </div>
+
+                    <!-- Research Internship -->
+                    <div class="timeline-item flex items-center" data-category="research">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="text-sm text-gray-500">Jan 2025 - Apr 2025</div>
+                            <div class="font-semibold text-gray-700">Boltzmann Labs, Hyderabad</div>
+                        </div>
+                        <div class="w-8 h-8 bg-teal-500 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Research</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3">ML-Driven Molecular Dynamics</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Developed machine learning-driven force fields for precise molecular dynamics simulations of protein-ligand interactions. 
+                                    Analyzed datasets SPICE, QM9, ANI1, and MD for performance improvements.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">TensorFlow</span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Molecular Dynamics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ML Engineer Role -->
+                    <div class="timeline-item flex items-center" data-category="production">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center justify-end mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Production</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3">Lip-Sync Optimization</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Optimized lip-sync modules by improving facial landmark detection and alignment using InsightFace. 
+                                    Implemented ML solutions using Docker containers and developed RESTful APIs.
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">InsightFace</span>
+                                    <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Docker</span>
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">FastAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-500 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-1/2 pl-8">
+                            <div class="text-sm text-gray-500">Aug 2024 - Sep 2024</div>
+                            <div class="font-semibold text-gray-700">TrueFan, Gurugram</div>
+                        </div>
+                    </div>
+
+                    <!-- IIT Bombay Projects -->
+                    <div class="timeline-item flex items-center" data-category="computer-vision">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="text-sm text-gray-500">2023 - 2024</div>
+                            <div class="font-semibold text-gray-700">IIT Bombay</div>
+                        </div>
+                        <div class="w-8 h-8 bg-purple-500 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center mb-4">
+                                    <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Academic</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3">Computer Vision Research</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Multiple research projects including Image Captioning with Cross-Attention, 
+                                    Facial Detection Bias Mitigation using SSVAE, and Image Segmentation with U-Net.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">PyTorch</span>
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Computer Vision</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Research</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Performance Dashboard -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Model Performance</h2>
+                <p class="text-xl text-gray-600">Interactive dashboard showcasing key metrics and achievements</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="metric-card p-6 rounded-xl text-center reveal">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">98.5%</div>
+                    <div class="text-gray-600">Image Classification Accuracy</div>
+                </div>
+                <div class="metric-card p-6 rounded-xl text-center reveal">
+                    <div class="text-3xl font-bold text-green-600 mb-2">95.2%</div>
+                    <div class="text-gray-600">Bias Reduction Achieved</div>
+                </div>
+                <div class="metric-card p-6 rounded-xl text-center reveal">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">87.3%</div>
+                    <div class="text-gray-600">Lip-Sync Accuracy</div>
+                </div>
+                <div class="metric-card p-6 rounded-xl text-center reveal">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">15+</div>
+                    <div class="text-gray-600">ML Models Deployed</div>
+                </div>
+            </div>
+            
+            <!-- Performance Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-8 reveal">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Model Performance Comparison</h3>
+                <div id="performance-chart" style="height: 400px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Project Cards -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Project Portfolio</h2>
+                <p class="text-xl text-gray-600">Deep dives into my machine learning projects</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="project-grid">
+                <!-- Image Captioning Project -->
+                <div class="project-card p-8 rounded-xl reveal" data-category="computer-vision">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl text-white">🖼️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">Image Captioning with Cross-Attention</h3>
+                            <p class="text-gray-600">Advanced Visual-Language Model</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Developed a sophisticated image captioning system that leverages cross-attention mechanisms to align visual and textual features. 
+                        The model achieves state-of-the-art results on MS COCO dataset with enhanced visual-language understanding.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600">92.4%</div>
+                            <div class="text-sm text-gray-600">BLEU-4 Score</div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600">35.7</div>
+                            <div class="text-sm text-gray-600">CIDEr Score</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">PyTorch</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Transformers</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">MS COCO</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            View Code
+                        </button>
+                        <button class="border border-gray-300 hover:border-gray-400 text-gray-700 px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            Live Demo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bias Mitigation Project -->
+                <div class="project-card p-8 rounded-xl reveal" data-category="research">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl text-white">⚖️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">Facial Detection Bias Mitigation</h3>
+                            <p class="text-gray-600">SSVAE for Fair AI</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Research project addressing demographic bias in facial detection systems using Semi-Supervised Variational Autoencoders (SSVAE). 
+                        Achieved significant bias reduction while maintaining high accuracy across diverse populations.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600">95.2%</div>
+                            <div class="text-sm text-gray-600">Bias Reduction</div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600">94.8%</div>
+                            <div class="text-sm text-gray-600">Overall Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">PyTorch</span>
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">SSVAE</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Fair AI</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            Read Paper
+                        </button>
+                        <button class="border border-gray-300 hover:border-gray-400 text-gray-700 px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            Dataset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video Recommendation Project -->
+                <div class="project-card p-8 rounded-xl reveal" data-category="production">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl text-white">🎥</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">Video Recommendation System</h3>
+                            <p class="text-gray-600">Scalable ML Architecture</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Architected a comprehensive video recommendation system with automated market trend analysis. 
+                        Handles real-time data processing from multiple social media platforms with high availability and scalability.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-600">10K+</div>
+                            <div class="text-sm text-gray-600">Videos Processed/Day</div>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-orange-600">99.9%</div>
+                            <div class="text-sm text-gray-600">System Uptime</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">FastAPI</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Docker</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Celery</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            System Design
+                        </button>
+                        <button class="border border-gray-300 hover:border-gray-400 text-gray-700 px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            API Docs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Image Segmentation Project -->
+                <div class="project-card p-8 rounded-xl reveal" data-category="computer-vision">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-2xl text-white">🔬</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">Image Segmentation with U-Net</h3>
+                            <p class="text-gray-600">High-Precision Visual Mapping</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Implemented advanced U-Net architecture for high-precision image segmentation tasks. 
+                        Achieved exceptional performance on medical imaging and satellite imagery datasets with fine-grained segmentation accuracy.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-orange-600">96.8%</div>
+                            <div class="text-sm text-gray-600">IoU Score</div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-red-600">98.1%</div>
+                            <div class="text-sm text-gray-600">Pixel Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">TensorFlow</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">U-Net</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Medical Imaging</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            View Model
+                        </button>
+                        <button class="border border-gray-300 hover:border-gray-400 text-gray-700 px-6 py-2 rounded-lg font-semibold transition-all duration-300">
+                            Dataset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">© 2024 Nirmal Solanki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initProjectFilters();
+            initTimelineAnimation();
+            initPerformanceChart();
+            initScrollReveal();
+        });
+
+        // Project filtering functionality
+        function initProjectFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                            anime({
+                                targets: card,
+                                opacity: [0, 1],
+                                scale: [0.8, 1],
+                                duration: 500,
+                                easing: 'easeOutQuart'
+                            });
+                        } else {
+                            anime({
+                                targets: card,
+                                opacity: [1, 0],
+                                scale: [1, 0.8],
+                                duration: 300,
+                                easing: 'easeOutQuart',
+                                complete: () => {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        }
+
+        // Timeline animation
+        function initTimelineAnimation() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            timelineItems.forEach(item => observer.observe(item));
+        }
+
+        // Performance chart initialization
+        function initPerformanceChart() {
+            const chartDom = document.getElementById('performance-chart');
+            const myChart = echarts.init(chartDom);
+            
+            const option = {
+                title: {
+                    text: 'Model Performance Metrics',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 18,
+                        fontWeight: 'bold'
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['Accuracy', 'Precision', 'Recall', 'F1-Score'],
+                    bottom: 10
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '15%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['Image Captioning', 'Bias Mitigation', 'Video Recommendation', 'Image Segmentation']
+                },
+                yAxis: {
+                    type: 'value',
+                    min: 80,
+                    max: 100
+                },
+                series: [
+                    {
+                        name: 'Accuracy',
+                        type: 'bar',
+                        data: [92.4, 94.8, 89.2, 96.8],
+                        itemStyle: {
+                            color: '#3b82f6'
+                        }
+                    },
+                    {
+                        name: 'Precision',
+                        type: 'bar',
+                        data: [91.8, 93.5, 88.7, 95.9],
+                        itemStyle: {
+                            color: '#10b981'
+                        }
+                    },
+                    {
+                        name: 'Recall',
+                        type: 'bar',
+                        data: [90.2, 92.1, 87.3, 94.6],
+                        itemStyle: {
+                            color: '#f59e0b'
+                        }
+                    },
+                    {
+                        name: 'F1-Score',
+                        type: 'bar',
+                        data: [91.0, 92.8, 88.0, 95.2],
+                        itemStyle: {
+                            color: '#8b5cf6'
+                        }
+                    }
+                ]
+            };
+            
+            myChart.setOption(option);
+            
+            // Responsive chart
+            window.addEventListener('resize', () => {
+                myChart.resize();
+            });
+        }
+
+        // Scroll reveal animation
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+        }
+    </script>
+</body>
+</html>
